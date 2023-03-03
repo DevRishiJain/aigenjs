@@ -6,3 +6,4 @@ export const VGG16_WEIGHTS_DIR="/Users/apple/AigenProtocol/codebase/aigenml/text
 export const TEXT_CLASSIFICATION_DIR="/Users/apple/AigenProtocol/codebase/aigenml/text_classification/"
 export const PINATA_API_KEY = "0be6789d95c7560e96ad"
 export const PINATA_SECRET_API_KEY = "824509499380845bb45fd21c9fc3e5179749f1a725b930a61cecfdb8b3aa5e87"
+export const NFTSTORAGE_TOKEN= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEE0ZDQ1NTFiQkU2NmRCZWNEOTUwOWEyOGNmRjU0YjFlOEJmNmE0RTQiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY3NjM2NzM5ODMyMywibmFtZSI6IkFpZ2VuIFByb3RvY29sIn0.x6vCYM0E_QQbtviGb4yR1208v6tgdJXIhlSmbsG6p40"
