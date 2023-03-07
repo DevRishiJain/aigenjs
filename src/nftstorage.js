@@ -6,6 +6,7 @@ import https from "https";
 import {client} from "./nftstorage_client.js";
 
 export async function deployFileToNFTStorage(fileName, filePath, func) {
+    console.log(fileName, filePath)
     let content = await fs_promises.readFile(path.join(filePath, fileName))
     const result = await client.storeBlob(new Blob([content.toString()]))
     console.log("Data uploaded:", result)
@@ -13,8 +14,7 @@ export async function deployFileToNFTStorage(fileName, filePath, func) {
     let result1 = await client.storeBlob(new Blob([JSON.stringify({name: fileName, cid: result.toString()})]))
     console.log("Metadata uploaded:", result1)
 
-    await func({fileName: fileName, data_cid: result.toString(), format: "json", metadata_cid: result1.toString()})
-    //return {fileName: fileName, data_cid: result.toString(), format: "json", metadata_cid: result1.toString()}
+    await func({fileName: fileName, dataCid: result.toString(), format: "json", metadataCid: result1.toString()})
 }
 
 export async function checkStatus(cid) {
@@ -24,7 +24,7 @@ export async function checkStatus(cid) {
 export async function deployFilesToNFTStorage(dirPath, func) {
     console.log("Dirpath:", dirPath)
     let fileNames = await fs_promises.readdir(dirPath);
-    console.log(fileNames)
+    console.log("Filenames:", fileNames)
     for (const fileName of fileNames) {
         console.log(fileName)
         await deployFileToNFTStorage(fileName, dirPath, async function (single_metadata) {
