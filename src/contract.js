@@ -1,6 +1,7 @@
-import {web3} from "./web3_obj.js";
+import {wallet,} from "./web3_obj.js";
 import {CONTRACT_ADDRESS} from "./config.js";
 import {readFile} from 'fs/promises';
+import ethers from "ethers";
 
 const abi = JSON.parse(
     await readFile(
@@ -8,4 +9,4 @@ const abi = JSON.parse(
     )
 );
 
-export const contract = new web3.eth.Contract(abi, CONTRACT_ADDRESS)
+export const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);

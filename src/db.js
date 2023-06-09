@@ -59,4 +59,18 @@ export function updateAINFT(ainft, values){
     });
 }
 
+export function addSmartContract(projectId, values, func){
+    let values1 = [values.address, values.chain, values.projectId, values.compiledContractPath]
+    let query = `INSET INTO smart_contract (address, chain, projectId, compiledContractPath) VALUES (?)`
+
+    db.run(query, values1, (err) => {
+        if (err) {
+            func("failure")
+        }
+        console.log("Smart contract details added")
+
+        func("success")
+    });
+}
+
 export default db;
