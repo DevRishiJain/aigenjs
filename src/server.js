@@ -5,7 +5,7 @@ import multer from 'multer'
 import cors from "cors";
 import fs from "fs/promises";
 import path from "path";
-import {AIGENJS_SERVER_PORT} from './config.js'
+import {AIGENJS_SERVER_PORT, MODELS_DIR} from './config.js'
 import {addSmartContract, getAINFTByProjectId, getAINFTProjectById} from './db.js'
 import compileAINFTTokenContract from "./CompileAINFTTokenContract.js";
 import deployAINFTTokenContract from "./DeployAINFTTokenContract.js";
@@ -31,7 +31,7 @@ app.post('/project/ainft', (req, res) => {
     const projectId = req.body.project_id;
 
     getAINFTProjectById(projectId, function (project) {
-        console.log("Project::", project)
+        console.log("Project:", project)
         getAINFTByProjectId(projectId, async function (ainfts) {
             for (const ainft of ainfts) {
                 console.log(ainft)
@@ -132,6 +132,36 @@ app.post("/project/contract", async (req, res) => {
         res.send({"status": "failure", "message": "Smart contract deployment failed"})
     }
 })
+
+// Saving and loading w3name Keys
+
+
+app.post('/saveSigningKey', async (req, res) => {
+
+    const { keys, projectId } = req.body;
+    console.log(keys,projectId)
+    let filepath = MODELS_DIR + projectId + "-w3keys.txt";
+    try {
+      await fs.writeFile(filepath, keys);
+      res.status(200).json({ message: 'Signing key saved successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to save signing key' });
+    }
+  });
+  
+  
+  app.post('/loadSigningKey', async (req, res) => {
+    const projectId = req.body.projectId;
+    let filename = MODELS_DIR + projectId + "-w3keys.txt";
+    try {
+      const keys = JSON.parse((await fs.readFile(filename)).toString())
+      res.status(200).json({ keys });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to load signing key' });
+    }
+  });
 
 
 app.listen(AIGENJS_SERVER_PORT, () => {
