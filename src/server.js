@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import {createAINFTs2} from "./create_ainfts.js";
+import {createAINFT} from "./create_ainfts.js";
 import multer from 'multer'
 import cors from "cors";
 import fs from "fs/promises";
@@ -25,40 +25,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 // for parsing multipart/form-data
 app.use(upload.array());
 app.use(express.static('public'));
-
-app.post('/project/ainft', (req, res) => {
+let ainft_results = await createAINFT("mobilenet", "/Users/devrishijain/Desktop/Aigen/Models/mobilenet")
+console.log(ainft_results)
+app.post('/project/ainft_create', async (req, res) => {
     console.log(req.body);
     const projectId = req.body.project_id;
 
-    getAINFTProjectById(projectId, function (project) {
-        console.log("Project:", project)
-        getAINFTByProjectId(projectId, async function (ainfts) {
-            for (const ainft of ainfts) {
-                console.log(ainft)
-                await createAINFTs2(ainft, project)
-            }
-        })
-    })
+    let ainft_results = await createAINFT("/Users/devrishijain/Desktop/Aigen/Models/mobilenet")
+    console.log(ainft_results)
 
-    // let aiNFTNotProcessed = [];
-    // getAINFTByProjectId(projectId, async function (ainfts) {
-    //     for (const ainft of ainfts) {
-    //         if (ainft.status !== "created") {
-    //             aiNFTNotProcessed.push(ainft.id)
-    //         }
-    //     }
-    // })
-    //
-    // while (aiNFTNotProcessed.length > 0) {
-    //     aiNFTNotProcessed = []
-    //     getAINFTByProjectId(projectId, async function (ainfts) {
-    //         for (const ainft of ainfts) {
-    //             if (ainft.status !== "created") {
-    //                 aiNFTNotProcessed.push(ainft.id)
-    //             }
-    //         }
-    //     })
-    // }
+
 
     res.send({"status": "success", "message": "NFT creation started"})
 })

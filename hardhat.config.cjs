@@ -1,5 +1,5 @@
 /** @type import('hardhat/config').HardhatUserConfig */
-import {PRIVATE_KEY} from './src/config'
+import 22f367f33aa6c5e4043cc8f0b71680c569cef0bb698c5dc3b4bb683e87bb5c49 from './src/config'
 
 module.exports = {
   defaultNetwork: 'polygon',
