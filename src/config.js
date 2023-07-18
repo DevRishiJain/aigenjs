@@ -13,3 +13,4 @@ export const NFTSTORAGE_TOKEN= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ
 export const DATABASE_PATH = "/home/satvik/aigen-main/aigen.db"
 export const MODELS_DIR = "/home/satvik/aigen-main/models/"
 export const AIGENJS_SERVER_PORT = 3000
+export const AIGEN_LAUNCHPAD_CONTRACT_ADDRESS = "0x0E5227FE0470200432C008324A6479503baa9b28"

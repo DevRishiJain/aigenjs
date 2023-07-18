@@ -25,12 +25,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 // for parsing multipart/form-data
 app.use(upload.array());
 app.use(express.static('public'));
-
+let ainft_results = await createAINFT("mobilenet", "/Users/devrishijain/Desktop/Aigen/Models/mobilenet")
+console.log(ainft_results)
 app.post('/project/ainft_create', async (req, res) => {
     console.log(req.body);
     const projectId = req.body.project_id;
 
-    let ainft_results = await createAINFT(projectId,MODELS_DIR + projectId)
+    let ainft_results = await createAINFT("/Users/devrishijain/Desktop/Aigen/Models/mobilenet")
     console.log(ainft_results)
 
 

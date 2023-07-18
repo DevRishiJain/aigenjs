@@ -24,7 +24,7 @@ export async function deployFileToNFTStorage(fileName, filePath, func) {
 export async function checkStatus(cid) {
     return await client.status(cid);
 }
-
+//deployFilesToNFTStorage("/Users/devrishijain/Desktop/Aigen/Models/mobilenet/final_shards")
 export async function deployFilesToNFTStorage(dirPath) {
     let fileNames = await fs_promises.readdir(dirPath);
     let all_metadata = [];
