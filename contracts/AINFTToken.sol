@@ -14,10 +14,14 @@ contract AINFTToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
 
     constructor() ERC721("AINFTToken", "AINFT") {}
 
-    function safeMint(address to, string memory uri) public onlyOwner {
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721URIStorage) returns (bool) {
+        return super.supportsInterface(interfaceId);
+    }
+
+    function safeMint(string memory uri) public onlyOwner {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
+        _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
     }
 

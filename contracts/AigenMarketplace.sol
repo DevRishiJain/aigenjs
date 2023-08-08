@@ -104,7 +104,7 @@ contract AigenMarketplace is ReentrancyGuard {
             revert NotListed(nftAddress, tokenId);
         }
         _;
-    }
+    }   
 
     function buyItem(address nftAddress, uint256 tokenId)
     external
